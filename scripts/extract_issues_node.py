@@ -86,13 +86,15 @@ def issues_to_excel(issues, filename="issues_setup_node.xlsx"):
 
     headers = [
         "Number", "Title", "State", "Created At", "Created Month",
-        "Closed At", "Closed Month", "Days Taken", "Labels"
+        "Closed At", "Closed Month", "Days Taken", "Labels", "Opened By", 
+        "Closed By", "Assignees"
     ]
     ws.append(headers)
 
     ist_offset = datetime.timedelta(hours=5, minutes=30)
     for issue in issues:
         labels = {lbl["name"].lower() for lbl in issue.get("labels", [])}
+        assignees = [a["login"] for a in issue.get("assignees", [])]
         created_at_raw = issue.get("created_at")
         closed_at_raw = issue.get("closed_at")
 
@@ -118,7 +120,10 @@ def issues_to_excel(issues, filename="issues_setup_node.xlsx"):
             sanitize_string(closed_at),
             sanitize_string(closed_month),
             days_taken,
-            sanitize_string(", ".join(labels))
+            sanitize_string(", ".join(labels)),
+            sanitize_string(opened_by),
+            sanitize_string(closed_by),
+            sanitize_string(", ".join(assignees))
         ]
 
         ws.append(row)

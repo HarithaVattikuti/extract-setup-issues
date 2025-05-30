@@ -76,13 +76,15 @@ def issues_to_excel(issues, filename="issues_setup_labeler.xlsx"):
 
     headers = [
         "Number", "Title", "State", "Created At", "Created Month",
-        "Closed At", "Closed Month", "Days Taken", "Labels"
+        "Closed At", "Closed Month", "Days Taken", "Labels", "Opened By", 
+        "Closed By", "Assignees"
     ]
     ws.append(headers)
 
     ist_offset = datetime.timedelta(hours=5, minutes=30)
     for issue in issues:
         labels = {lbl["name"].lower() for lbl in issue.get("labels", [])}
+        assignees = [a["login"] for a in issue.get("assignees", [])]
         created_at_raw = issue.get("created_at")
         closed_at_raw = issue.get("closed_at")
 
@@ -107,7 +109,10 @@ def issues_to_excel(issues, filename="issues_setup_labeler.xlsx"):
             closed_at,
             closed_month,
             days_taken,
-            ", ".join(labels)
+            ", ".join(labels),
+            opened_by,
+            closed_by,
+            ", ".join(assignees)
         ]
 
         ws.append(row)
