@@ -112,7 +112,7 @@ def issues_to_excel(issues, filename="issues_setup_node.xlsx"):
         opened_by = issue.get("user", {}).get("login", "")
         closed_by = issue.get("closed_by", {}).get("login", "") if issue.get("closed_by") else ""
 
-        Sanitize all string values in the row
+        #Sanitize all string values in the row
         row = [
             issue_number,
             sanitize_string(issue["title"]),
