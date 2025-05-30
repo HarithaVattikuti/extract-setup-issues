@@ -113,19 +113,33 @@ def issues_to_excel(issues, filename="issues_setup_node.xlsx"):
         closed_by = issue.get("closed_by", {}).get("login", "") if issue.get("closed_by") else ""
 
         # Sanitize all string values in the row
+        # row = [
+        #     issue_number,
+        #     sanitize_string(issue["title"]),
+        #     sanitize_string(issue["state"]),
+        #     sanitize_string(created_at),
+        #     sanitize_string(created_month),
+        #     sanitize_string(closed_at),
+        #     sanitize_string(closed_month),
+        #     days_taken,
+        #     sanitize_string(", ".join(labels)),
+        #     sanitize_string(opened_by),
+        #     sanitize_string(closed_by),
+        #     sanitize_string(", ".join(assignees))
+        # ]
         row = [
             issue_number,
-            sanitize_string(issue["title"]),
-            sanitize_string(issue["state"]),
-            sanitize_string(created_at),
-            sanitize_string(created_month),
-            sanitize_string(closed_at),
-            sanitize_string(closed_month),
+            issue["title"],
+            issue["state"],
+            created_at,
+            created_month,
+            closed_at,
+            closed_month,
             days_taken,
-            sanitize_string(", ".join(labels)),
-            sanitize_string(opened_by),
-            sanitize_string(closed_by),
-            sanitize_string(", ".join(assignees))
+            ", ".join(labels),
+            opened_by,
+            closed_by,
+            ", ".join(assignees)
         ]
 
         ws.append(row)
