@@ -85,8 +85,8 @@ def issues_to_excel(issues, filename="issues_setup_node.xlsx"):
     ws.title = "Issues"
 
     headers = [
-        "Number", "Title", "State", "Created At", "Created Month",
-        "Closed At", "Closed Month", "Days Taken", "Labels", "Opened By", 
+        "Number", "Title", "State", "Created At", "Created Month","Created Year",
+        "Closed At", "Closed Month","Closed Year", "Days Taken", "Labels", "Opened By", 
         "Closed By", "Assignees"
     ]
     ws.append(headers)
@@ -104,7 +104,9 @@ def issues_to_excel(issues, filename="issues_setup_node.xlsx"):
         created_at = created_date.strftime("%Y-%m-%d") if created_date else ""
         closed_at = closed_date.strftime("%Y-%m-%d") if closed_date else ""
         created_month = created_date.strftime("%b-%Y") if created_date else ""
+        created_year = created_date.strftime("%Y") if created_date else ""
         closed_month = closed_date.strftime("%b-%Y") if closed_date else ""
+        closed_year = closed_date.strftime("%Y") if closed_date else ""
         days_taken = (closed_date - created_date).days if created_date and closed_date else ""
 
         issue_number = issue["number"]
@@ -119,8 +121,10 @@ def issues_to_excel(issues, filename="issues_setup_node.xlsx"):
             sanitize_string(issue["state"]),
             sanitize_string(created_at),
             sanitize_string(created_month),
+            sanitize_string(created_year),
             sanitize_string(closed_at),
             sanitize_string(closed_month),
+            sanitize_string(closed_year),
             days_taken,
             sanitize_string(", ".join(labels)),
             sanitize_string(opened_by),
