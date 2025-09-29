@@ -110,7 +110,7 @@ def issues_to_excel(issues, filename="issues_setup_dotnet.xlsx"):
             issue["state"],
             created_at,
             created_month,
-            created_year
+            created_year,
             closed_at,
             closed_month,
             closed_year,
