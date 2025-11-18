@@ -1,4 +1,9 @@
+import os
 import requests
+import datetime
+import openpyxl
+import time
+from openpyxl.styles import Font
 
 # List of repositories in "owner/repo" format
 repos = [
