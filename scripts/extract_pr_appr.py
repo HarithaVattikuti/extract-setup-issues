@@ -12,7 +12,11 @@ repos = [
     "actions/publish-action"
 ]
 
-token = 'YOUR_GITHUB_TOKEN'  # Replace with your token
+#token = 'YOUR_GITHUB_TOKEN'  # Replace with your token
+# Auth and repo info
+token = os.getenv("GH_TOKEN")
+if not TOKEN:
+    raise EnvironmentError("Missing GitHub token. Please set 'GH_TOKEN' in your environment or GitHub Actions secrets.")
 
 headers = {
     'Authorization': f'token {token}',
