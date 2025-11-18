@@ -20,7 +20,7 @@ repos = [
 #token = 'YOUR_GITHUB_TOKEN'  # Replace with your token
 # Auth and repo info
 token = os.getenv("GH_TOKEN")
-if not TOKEN:
+if not token:
     raise EnvironmentError("Missing GitHub token. Please set 'GH_TOKEN' in your environment or GitHub Actions secrets.")
 
 headers = {
